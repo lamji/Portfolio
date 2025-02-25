@@ -165,6 +165,7 @@
         .project-item {
             position: relative;
             display: inline-block;
+            margin-top: 20px;
         }
 
         /* The modal style for the floating image, centered in the viewport */
@@ -224,6 +225,14 @@
             color: #002cad;
         }
 
+        .print-info {
+            display: none;
+        }
+
+        .web-view {
+            display: block;
+        }
+
         @media screen and (max-width: 768px) {
 
 
@@ -271,6 +280,14 @@
                 /* Width x Height in inches */
                 size: portrait;
                 margin: 10mm;
+            }
+
+            .print-info {
+                display: block;
+            }
+
+            .web-view {
+                display: none;
             }
 
             /* Additional print styles */
@@ -333,10 +350,16 @@
             <h1 class="name2">Lampago</h1>
             <div></div>
             <p>React Developer | Freelancer</p>
-            <p class="contact-info">📞 09490390624 | ✉️ lampagojick5@gmail.com | 🔗 <a
+            <p class="contact-info web-view">📞 09490390624 | ✉️ lampagojick5@gmail.com | 🔗 <a
                     href="https://www.linkedin.com/in/jick-lampago/" target="_blank"
                     style=" text-decoration: none;">LinkedIn</a><span
                     class="link">https://www.linkedin.com/in/jick-lampago/</span></p>
+            <div class="print-info">
+                <p class="contact-info">📞 09490390624 </p>
+                <p class="contact-info">✉️ lampagojick5@gmail.com</p>
+                <p class="contact-info">🔗 https://www.linkedin.com/in/jick-lampago/</p>
+                <p class="contact-info">🏠 Pio V. Corpus, Masbate, Ph</p>
+            </div>
             <button id="downloadBtn" class="btn btn-primary mb-3">Download Resume as PDF</button>
             <div class="lineup"></div>
         </div>
@@ -373,35 +396,34 @@
                 </div>
                 <div style="margin-top: 50px;">
                     <h5 class="skillsWrapper">PROJECTS</h5>
-                    <ul>
-                        <li class="project-item">
-                            <h5>Covid 19 tracker - dark mode</h5>
-                            <p>React.js - Next.js - React Bootstrap - React Sass - MapBox - JavaScrip Es6 - Public API
-                            </p>
-                            <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
-                            <!-- The modal image that appears on hover -->
-                            <img src="https://static.vecteezy.com/system/resources/thumbnails/032/487/851/small_2x/tender-touch-baby-care-products-presented-on-a-white-canvas-generative-ai-photo.jpg"
-                                alt="Covid 19 Tracker Image" class="modal-image" />
-                        </li>
-                        <li class="project-item">
-                            <h5>Web POS</h5>
-                            <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
-                                -Next API</p>
-                            <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
-                            <!-- The modal image for Web POS -->
-                            <img src="https://img.freepik.com/free-photo/flat-lay-natural-self-care-products-composition_23-2148990019.jpg"
-                                alt="Web POS Image" class="modal-image" />
-                        </li>
-                        <li class="project-item">
-                            <h5>Task Logger</h5>
-                            <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
-                                -Next API</p>
-                            <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
-                            <!-- The modal image for Task Logger -->
-                            <img src="https://media.istockphoto.com/id/584574708/photo/soap-bar-and-liquid-shampoo-shower-gel-towels-spa-kit.jpg?s=612x612&w=0&k=20&c=TFeQmTwVUwKY0NDKFFORe3cwDCxRtotFgEujMswn3dc="
-                                alt="Task Logger Image" class="modal-image" />
-                        </li>
-                    </ul>
+                    <li class="project-item">
+                        <h5>Covid 19 tracker - dark mode</h5>
+                        <p>React.js - Next.js - React Bootstrap - React Sass - MapBox - JavaScrip Es6 - Public API
+                        </p>
+                        <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
+                        <!-- The modal image that appears on hover -->
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/032/487/851/small_2x/tender-touch-baby-care-products-presented-on-a-white-canvas-generative-ai-photo.jpg"
+                            alt="Covid 19 Tracker Image" class="modal-image" />
+                    </li>
+                    <li class="project-item">
+                        <h5>Web POS</h5>
+                        <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
+                            -Next API</p>
+                        <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
+                        <!-- The modal image for Web POS -->
+                        <img src="https://img.freepik.com/free-photo/flat-lay-natural-self-care-products-composition_23-2148990019.jpg"
+                            alt="Web POS Image" class="modal-image" />
+                    </li>
+                    <li class="project-item">
+                        <h5>Task Logger</h5>
+                        <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
+                            -Next API</p>
+                        <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
+                        <!-- The modal image for Task Logger -->
+                        <img src="https://media.istockphoto.com/id/584574708/photo/soap-bar-and-liquid-shampoo-shower-gel-towels-spa-kit.jpg?s=612x612&w=0&k=20&c=TFeQmTwVUwKY0NDKFFORe3cwDCxRtotFgEujMswn3dc="
+                            alt="Task Logger Image" class="modal-image" />
+                    </li>
+
 
                 </div>
             </div>
@@ -411,7 +433,9 @@
             <div class="lineTwo ">
                 <div class="aboutMe">
                     <h5 class="skillsWrapper">ABOUT ME</h5>
-                    <p>Hello! I’m a passionate web developer with expertise in a wide range of modern technologies. I
+                    <p style="margin-bottom: 15px !important;">Hello! I’m a passionate web developer with expertise in a
+                        wide range
+                        of modern technologies. I
                         specialize in JavaScript,
                         ES6, and frameworks like React.js and Next.js, bringing dynamic and responsive applications to
                         life. My experience spans
@@ -437,21 +461,10 @@
                                 a functional React project using
                                 the MVVM approach, Implement Redux on every React project, including API integration
                                 and validation.</p>
-                            <p class="p-head">Project Involved</p>
+                            <p class="p-head">Tech used</p>
                             <ul>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Backend Developer (node.js)</li>
-                                <li><span class="span-head">Reward and Redemption</span>- Backend Developer (node.js)
-                                </li>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Front End Developer (React,
-                                    Next.js, MUI and Redux)</li>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Backend Developer (node.js)</li>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Backend Developer (node.js)</li>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Backend Developer (node.js)</li>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Backend Developer (node.js)</li>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Backend Developer (node.js)</li>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Backend Developer (node.js)</li>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Backend Developer (node.js)</li>
-                                <li><span class="span-head">Pdf Bot Generator</span>- Backend Developer (node.js)</li>
+                                <li>Backend Support (node.js, express.js, Javascript, Mustache.js)</li>
+                                <li>Front-End (React • React-Query • React-redux-toolkit • Material UI • REST API)</li>
                             </ul>
                         </div>
                         <div class="timeline-item right">
