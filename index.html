@@ -64,6 +64,21 @@
         .right::after {
             left: -10px;
         }
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 20px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 40px;
+                padding-right: 20px;
+                left: 0 !important;
+            }
+            .timeline-item::after {
+                left: 10px !important;
+                right: auto;
+            }
+        }
     </style>
 </head>
 <body>
