@@ -1,143 +1,452 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creative Resume</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inconsolata', monospace;
             background-color: #f4f4f4;
             color: #333;
         }
+
         .resume-header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 40px 0;
-            text-align: center;
-            border-radius: 10px;
+            padding: 40px;
+            background-color: #fffefe;
+            height: 40vh;
         }
+
         .contact-info {
-            font-size: 12px;
             display: block;
-            margin-top: -20px;
+            margin-top: -15px;
         }
+
         .timeline {
             position: relative;
             max-width: 800px;
-            margin: 50px auto;
+            /* margin: 50px auto; */
         }
+
         .timeline::after {
             content: '';
             position: absolute;
             width: 4px;
-            background-color: #2980b9;
+            background-color: #333;
             top: 0;
             bottom: 0;
-            left: 50%;
-            margin-left: -2px;
+            left: 0;
+            /* Align timeline to left */
+            margin-left: 0;
+            /* Remove negative margin */
         }
+
         .timeline-item {
             padding: 20px;
             position: relative;
-            width: 50%;
-            background: #ecf0f1;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 60%;
         }
+
         .left {
             left: 0;
         }
+
         .right {
             left: 50%;
         }
+
         .timeline-item::after {
             content: '';
             position: absolute;
             width: 20px;
             height: 20px;
-            background-color: #2980b9;
+            background-color: #333;
             border-radius: 50%;
             top: 15px;
             right: -10px;
         }
+
         .right::after {
             left: -10px;
         }
+
+        .name {
+            margin: 0 !important;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+        }
+
+        .name2 {
+            margin: 0 !important;
+            margin-top: -10px !important;
+            font-weight: bolder;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+        }
+
+        .lineup {
+            background-color: #333;
+            height: 35px;
+            width: 5px;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .lineOne {
+            width: 30%;
+        }
+
+        .lineTwo {
+            width: 60%;
+        }
+
+        .skillsWrapper {
+            letter-spacing: 7px;
+            font-weight: bold;
+            font-size: 26px;
+        }
+
+        .icon-paragraph {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .icon-paragraph span {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-paragraph span::before {
+            content: "•";
+            /* Circle (bullet) icon */
+            /* Adjust the size of the circle */
+            margin-right: 5px;
+            /* Space between icon and text */
+        }
+
+        .timeline::after {
+            left: 20px;
+        }
+
+        .timeline-item {
+            width: 100%;
+            padding-left: 40px;
+
+            left: 0 !important;
+        }
+
+        .timeline-item::after {
+            left: 10px !important;
+            right: auto;
+        }
+
+        h5 {
+            font-weight: bolder;
+        }
+
+        li {
+            margin-bottom: 10px !important
+        }
+
+        /* Container for the project item */
+        .project-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* The modal style for the floating image, centered in the viewport */
+        .project-item .modal-image {
+            position: fixed;
+            /* Position it relative to the viewport */
+            top: 50%;
+            /* Position vertically at the center of the viewport */
+            left: 50%;
+            /* Position horizontally at the center of the viewport */
+            transform: translate(-50%, -50%);
+            /* Center the image exactly */
+            width: 500px;
+            /* Set the size of the modal image */
+            height: auto;
+            opacity: 0;
+            /* Hidden by default */
+            visibility: hidden;
+            /* Hidden by default */
+            transition: opacity 0.3s ease, visibility 0s 0.3s;
+            /* Smooth fade-in */
+            z-index: 10;
+            /* Ensure it appears above other elements */
+            border: 2px solid #fff;
+            /* Optional: Add a border around the image */
+            border-radius: 8px;
+            /* Optional: Add rounded corners */
+        }
+
+        /* Show the modal image when hovering over the project item */
+        .project-item:hover .modal-image {
+            opacity: 1;
+            /* Make the image visible */
+            visibility: visible;
+            /* Ensure it's visible */
+            transition: opacity 0.3s ease, visibility 0s 0s;
+            /* Immediate visibility change */
+        }
+
+        /* Optional: Style for the project name and description */
+        .project-item h5,
+        .project-item p {
+            margin-bottom: 10px;
+        }
+
+        .link {
+            display: none;
+        }
+
+
         @media screen and (max-width: 768px) {
-            .timeline::after {
-                left: 20px;
+            .resume-header {
+                padding: 40px;
+                background-color: #fffefe;
+                height: 40vh;
             }
-            .timeline-item {
+
+            .lineOne {
                 width: 100%;
-                padding-left: 40px;
-                padding-right: 20px;
-                left: 0 !important;
             }
-            .timeline-item::after {
-                left: 10px !important;
-                right: auto;
+
+            .lineTwo {
+                width: 100%;
+            }
+
+            .wrapper {
+                display: block;
+            }
+
+            .aboutMe {
+                display: none;
+            }
+
+            ul {
+                padding-left: 0;
+            }
+
+            li {
+                margin-left: 20px;
+            }
+        }
+
+        @media print {
+
+            /* Set the page to portrait mode */
+            @page {
+                size: 8.5in 13in;
+                /* Width x Height in inches */
+                size: portrait;
+                margin: 10mm;
+            }
+
+            /* Additional print styles */
+            body {
+                font-family: 'Inconsolata', monospace;
+                font-size: 12px;
+                background-color: #ffffff;
+            }
+
+
+            p {
+                font-size: 16px !important;
+            }
+
+            .resume-header {
+                padding: 10px 40px;
+                background-color: #fffefe;
+                height: 20vh;
+            }
+
+            /* .timeline,
+            .skillsWrapper,
+            .project-item,
+            .aboutMe {
+                font-size: 10px;
+                line-height: 1.5;
+            } */
+
+            /* Hide elements that should not appear in the print version */
+            #downloadBtn,
+            a {
+                display: none;
+            }
+
+            ul {
+                padding-left: 0;
+            }
+
+            .link {
+                display: block;
+            }
+
+            .exp {
+                margin-top: 60px !important;
+            }
+
+            li {
+                margin-left: 20px;
+                font-size: 16px !important;
             }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
+    <div>
         <div class="resume-header">
-            <h1>John Doe</h1>
-            <p>Web Developer | UI/UX Designer | Freelancer</p>
-            <p class="contact-info">📞 (123) 456-7890 | ✉️ johndoe@example.com | 🔗 <a href="https://linkedin.com/in/johndoe" style="color: white; text-decoration: none;">LinkedIn</a></p>
+            <div class="lineup"></div>
+            <h4 class="name">Jick</h4>
+            <h1 class="name2">Lampago</h1>
+            <div></div>
+            <p>React Developer | Freelancer</p>
+            <p class="contact-info">📞 (123) 456-7890 | ✉️ johndoe@example.com | 🔗 <a
+                    href="https://linkedin.com/in/johndoe" style=" text-decoration: none;">LinkedIn</a><span
+                    class="link">https://www.linkedin.com/in/jick-lampago/</span></p>
+            <button id="downloadBtn" class="btn btn-primary mb-3">Download Resume as PDF</button>
+            <div class="lineup"></div>
         </div>
-        
-        <div class="timeline">
-            <div class="timeline-item left">
-                <h3>Front-End Developer - ABC Company (2021 - Present)</h3>
-                <ul>
-                    <li>Developed modern UI components using React.</li>
-                    <li>Improved website performance by 30%.</li>
-                </ul>
+
+        <div class="wrapper" style="padding: 40px;">
+            <div class="lineOne">
+                <div>
+                    <h4 class="skillsWrapper">SKILLS</h4>
+                    <p class="icon-paragraph">
+                        <span>Javascript</span>
+                        <span>ES6</span>
+                        <span>Next.js</span>
+                        <span>Jquery</span>
+                        <span>Express.js</span>
+                        <span>MongoDB</span>
+                        <span>NoSql</span>
+                        <span>Node.js</span>
+                        <span>React.js</span>
+                        <span>Sass</span>
+                        <span>Css3</span>
+                        <span>Html 5</span>
+                        <span>Bootstrap 4 and 5</span>
+                        <span>React Bootstrap</span>
+                        <span>Material UI</span>
+                        <span>Rest API</span>
+                        <span>Creating API</span>
+                        <span>Git Version Control</span>
+                        <span>Redux</span>
+                        <span>React Package</span>
+                        <span>React-redux-toolkit</span>
+                        <span>React-query</span>
+                        <span>Typescript</span>
+                    </p>
+                </div>
+                <div style="margin-top: 50px;">
+                    <h5 class="skillsWrapper">PROJECTS</h5>
+                    <ul>
+                        <li class="project-item">
+                            <h5>Covid 19 tracker - dark mode</h5>
+                            <p>React.js - Next.js - React Bootstrap - React Sass - MapBox - JavaScrip Es6 - Public API
+                            </p>
+                            <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
+                            <!-- The modal image that appears on hover -->
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/032/487/851/small_2x/tender-touch-baby-care-products-presented-on-a-white-canvas-generative-ai-photo.jpg"
+                                alt="Covid 19 Tracker Image" class="modal-image" />
+                        </li>
+                        <li class="project-item">
+                            <h5>Web POS</h5>
+                            <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
+                                -Next API</p>
+                            <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
+                            <!-- The modal image for Web POS -->
+                            <img src="https://img.freepik.com/free-photo/flat-lay-natural-self-care-products-composition_23-2148990019.jpg"
+                                alt="Web POS Image" class="modal-image" />
+                        </li>
+                        <li class="project-item">
+                            <h5>Task Logger</h5>
+                            <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
+                                -Next API</p>
+                            <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
+                            <!-- The modal image for Task Logger -->
+                            <img src="https://media.istockphoto.com/id/584574708/photo/soap-bar-and-liquid-shampoo-shower-gel-towels-spa-kit.jpg?s=612x612&w=0&k=20&c=TFeQmTwVUwKY0NDKFFORe3cwDCxRtotFgEujMswn3dc="
+                                alt="Task Logger Image" class="modal-image" />
+                        </li>
+                    </ul>
+
+                </div>
             </div>
-            <div class="timeline-item right">
-                <h3>Web Designer - XYZ Agency (2019 - 2021)</h3>
-                <ul>
-                    <li>Designed wireframes and prototypes for client projects.</li>
-                    <li>Worked closely with developers to implement UI designs.</li>
-                </ul>
-            </div>
-            <div class="timeline-item left">
-                <h3>Bachelor's in Computer Science - University of Example (2015 - 2019)</h3>
-            </div>
-            <div class="timeline-item right">
-                <h3>Portfolio Website</h3>
-                <p>A personal portfolio showcasing my skills.</p>
-            </div>
-            <div class="timeline-item left">
-                <h3>E-commerce Platform</h3>
-                <p>Developed a full-stack e-commerce app.</p>
+
+
+
+            <div class="lineTwo ">
+                <div class="aboutMe">
+                    <h5 class="skillsWrapper">ABOUT ME</h5>
+                    <p>Hello! I’m a passionate web developer with expertise in a wide range of modern technologies. I
+                        specialize in JavaScript,
+                        ES6, and frameworks like React.js and Next.js, bringing dynamic and responsive applications to
+                        life. My experience spans
+                        backend development with Node.js, Express.js, and MongoDB, as well as working with NoSQL
+                        databases.</p>
+                    <p>I’m proficient in frontend technologies like HTML5, CSS3, Sass, and frameworks such as Bootstrap
+                        and Material UI,
+                        ensuring clean, responsive, and user-friendly interfaces. With knowledge in creating and
+                        consuming REST APIs, managing
+                        state with Redux, React-Redux Toolkit, and using tools like React Query, I can build full-stack
+                        solutions that perform
+                        at scale.</p>
+
+                </div>
+                <div style="margin-top: 50px;" class="exp">
+                    <h5 class="skillsWrapper">EXPERIENCE</h5>
+                    <div class="timeline">
+                        <div class="timeline-item right">
+                            <h5>Front-End Developer - ABC Company (2021 - Present)</h5>
+                            <ul>
+                                <li>Developed modern UI components using React.</li>
+                                <li>Improved website performance by 30%.</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item right">
+                            <h5>Web Designer - XYZ Agency (2019 - 2021)</h5>
+                            <ul>
+                                <li>Designed wireframes and prototypes for client projects.</li>
+                                <li>Worked closely with developers to implement UI designs.</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item right">
+                            <h5>Bachelor's in Computer Science - University of Example (2015 - 2019)</h5>
+                        </div>
+                        <div class="timeline-item right">
+                            <h5>Portfolio Website</h5>
+                            <p>A personal portfolio showcasing my skills.</p>
+                        </div>
+                        <div class="timeline-item right">
+                            <h5>E-commerce Platform</h5>
+                            <p>Developed a full-stack e-commerce app.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="container mt-5">
-            <h2 class="text-center">Skills</h2>
-            <div class="row text-center">
-                <div class="col-md-4"><p>JavaScript, ES6</p></div>
-                <div class="col-md-4"><p>Next.js, jQuery</p></div>
-                <div class="col-md-4"><p>Express.js, MongoDB</p></div>
-                <div class="col-md-4"><p>NoSQL, Node.js</p></div>
-                <div class="col-md-4"><p>React.js, Sass</p></div>
-                <div class="col-md-4"><p>CSS3, HTML5</p></div>
-                <div class="col-md-4"><p>Bootstrap 4 & 5</p></div>
-                <div class="col-md-4"><p>React Bootstrap, Material UI</p></div>
-                <div class="col-md-4"><p>REST API, Creating API</p></div>
-                <div class="col-md-4"><p>Git Version Control</p></div>
-                <div class="col-md-4"><p>Redux, React Package</p></div>
-                <div class="col-md-4"><p>React-Redux Toolkit</p></div>
-                <div class="col-md-4"><p>React-Query</p></div>
-                <div class="col-md-4"><p>TypeScript</p></div>
-            </div>
-        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Handle the PDF download
+        document.getElementById("downloadBtn").addEventListener("click", function () {
+            window.print();
+        });
+    </script>
+    </script>
 </body>
+
 </html>
