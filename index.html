@@ -246,11 +246,26 @@
 
         .edit-icon {
             position: fixed;
-            bottom: 80px;
+            bottom: 40px;
             right: 20px;
             z-index: 100;
             cursor: pointer;
             background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            padding: 9px 12px;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .version-icon {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            z-index: 100;
+            cursor: pointer;
+            background-color: #28a745;
             color: white;
             border-radius: 50%;
             padding: 9px 12px;
@@ -412,7 +427,9 @@
                 <p class="contact-info web-view" contenteditable="false">📞 09490390624 <span
                         class="lineHeight">|</span></p>
                 <p class="contact-info">🏠 Pio V. Corpus, Masbate, Ph <span class="lineHeight">|</span></p>
-                <p class="contact-info web-view" contenteditable="false">✉️ lampagojick5@gmail.com <span
+                <p class="contact-info web-view" contenteditable="false">✉️ <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=lampagojick5@gmail.com" target="_blank"
+                        style="text-decoration: none; color: inherit;">lampagojick5@gmail.com</a> <span
                         class="lineHeight">|</span></p>
 
                 <p class="contact-info web-view" contenteditable="false"> 🔗 <a
@@ -565,6 +582,7 @@
         </div>
 
     </div>
+    <div class="version-icon" id="versionIcon">V2</div>
     <div class="edit-icon" id="editIcon">✎</div>
 
     <!-- Modal -->
@@ -608,6 +626,11 @@
             });
             const editModal = new bootstrap.Modal(document.getElementById('editModal'));
             editModal.show();
+        });
+
+        // Redirect to another resume version
+        document.getElementById("versionIcon").addEventListener("click", function () {
+            window.location.href = "/D:/9-PERSONAL PROJECTS/17-htmlOnly/v2.html";
         });
     </script>
 </body>
