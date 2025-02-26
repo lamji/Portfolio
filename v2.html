@@ -268,7 +268,7 @@
             background-color: #28a745;
             color: white;
             border-radius: 50%;
-            padding: 9px 12px;
+            padding: 1px 12px 9px 12px;
             font-size: 24px;
             width: 50px;
             height: 50px;
@@ -300,6 +300,13 @@
                 bottom: 20px;
                 left: 50%;
                 transform: translateX(-50%);
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .back-icon-con {
+                font-size: 14px;
+                transform: rotate(90deg);
                 text-align: center;
                 cursor: pointer;
             }
@@ -582,7 +589,12 @@
         </div>
 
     </div>
-    <div class="back-icon" id="backIcon">Back</div>
+    <div class="back-icon" id="backIcon">
+        <div class="back-icon-con">
+            <span style="font-size: 34px;">&#8595;</span>
+        </div>
+
+    </div>
     <div class="edit-icon" id="editIcon">✎</div>
 
     <!-- Modal -->
