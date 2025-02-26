@@ -19,7 +19,8 @@
         .resume-header {
             padding: 40px;
             background-color: #fffefe;
-            height: 40vh;
+            position: relative;
+            height: auto;
         }
 
         .contact-info {
@@ -233,19 +234,60 @@
             display: block;
         }
 
+        .infoHolder {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .arrow-down {
+            display: none;
+        }
+
+        .edit-icon {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 100;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            padding: 9px 12px;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+        }
+
         @media screen and (max-width: 768px) {
 
 
             .resume-header {
                 padding: 10px 30px;
                 background-color: #fffefe;
-                height: 43vh;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                justify-content: center;
+                position: relative;
             }
 
-            /* #downloadBtn,
-            a {
-                display: none;
-            } */
+            .infoHolder {
+                display: block;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .arrow-down {
+                display: block;
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+                cursor: pointer;
+            }
 
             .lineOne {
                 width: 100%;
@@ -270,6 +312,10 @@
             li {
                 margin-left: 20px;
             }
+
+            .lineHeight {
+                display: none;
+            }
         }
 
         @media print {
@@ -280,6 +326,18 @@
                 /* Width x Height in inches */
                 size: portrait;
                 margin: 10mm;
+            }
+
+            .edit-icon {
+                display: none;
+            }
+
+            .lineHeight {
+                display: none;
+            }
+
+            .arrow-down {
+                display: none;
             }
 
             .print-info {
@@ -294,7 +352,7 @@
             body {
                 font-family: 'Inconsolata', monospace;
                 font-size: 12px;
-                background-color: #ffffff;
+                /* background-color: #ffffff; */
             }
 
 
@@ -305,7 +363,7 @@
             .resume-header {
                 padding: 10px 40px;
                 background-color: #fffefe;
-                height: 20vh;
+                height: auto;
             }
 
             /* .timeline,
@@ -346,14 +404,22 @@
     <div>
         <div class="resume-header">
             <div class="lineup"></div>
-            <h4 class="name">Jick</h4>
-            <h1 class="name2">Lampago</h1>
+            <h4 class="name" contenteditable="false">Jick</h4>
+            <h1 class="name2" contenteditable="false">Lampago</h1>
             <div></div>
-            <p>React Developer | Freelancer</p>
-            <p class="contact-info web-view">📞 09490390624 | ✉️ lampagojick5@gmail.com | 🔗 <a
-                    href="https://www.linkedin.com/in/jick-lampago/" target="_blank"
-                    style=" text-decoration: none;">LinkedIn</a><span
-                    class="link">https://www.linkedin.com/in/jick-lampago/</span></p>
+            <p contenteditable="false">React Developer | Freelancer</p>
+            <div class="infoHolder">
+                <p class="contact-info web-view" contenteditable="false">📞 09490390624 <span
+                        class="lineHeight">|</span></p>
+                <p class="contact-info web-view" contenteditable="false">✉️ lampagojick5@gmail.com <span
+                        class="lineHeight">|</span></p>
+                <p class="contact-info web-view" contenteditable="false"> 🔗 <a
+                        href="https://www.linkedin.com/in/jick-lampago/" target="_blank"
+                        style=" text-decoration: none;">LinkedIn</a><span
+                        class="link">https://www.linkedin.com/in/jick-lampago/</span>
+                </p>
+            </div>
+
             <div class="print-info">
                 <p class="contact-info">📞 09490390624 </p>
                 <p class="contact-info">✉️ lampagojick5@gmail.com</p>
@@ -362,13 +428,17 @@
             </div>
             <button id="downloadBtn" class="btn btn-primary mb-3">Download Resume as PDF</button>
             <div class="lineup"></div>
+            <!-- Add arrow indicating more content below -->
+            <div class="arrow-down" id="arrowDown">
+                <span style="font-size: 44px;">&#8595;</span>
+            </div>
         </div>
 
-        <div class="wrapper" style="padding: 40px;">
+        <div class="wrapper" id="nextSection" style="padding: 40px;">
             <div class="lineOne">
                 <div>
                     <h4 class="skillsWrapper">SKILLS</h4>
-                    <p class="icon-paragraph">
+                    <p class="icon-paragraph" contenteditable="false">
                         <span>Javascript</span>
                         <span>ES6</span>
                         <span>Next.js</span>
@@ -396,7 +466,7 @@
                 </div>
                 <div style="margin-top: 50px;">
                     <h5 class="skillsWrapper">PROJECTS</h5>
-                    <li class="project-item">
+                    <li class="project-item" contenteditable="false">
                         <h5>Covid 19 tracker - dark mode</h5>
                         <p>React.js - Next.js - React Bootstrap - React Sass - MapBox - JavaScrip Es6 - Public API
                         </p>
@@ -405,7 +475,7 @@
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/032/487/851/small_2x/tender-touch-baby-care-products-presented-on-a-white-canvas-generative-ai-photo.jpg"
                             alt="Covid 19 Tracker Image" class="modal-image" />
                     </li>
-                    <li class="project-item">
+                    <li class="project-item" contenteditable="false">
                         <h5>Web POS</h5>
                         <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
                             -Next API</p>
@@ -414,7 +484,7 @@
                         <img src="https://img.freepik.com/free-photo/flat-lay-natural-self-care-products-composition_23-2148990019.jpg"
                             alt="Web POS Image" class="modal-image" />
                     </li>
-                    <li class="project-item">
+                    <li class="project-item" contenteditable="false">
                         <h5>Task Logger</h5>
                         <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
                             -Next API</p>
@@ -433,7 +503,8 @@
             <div class="lineTwo ">
                 <div class="aboutMe">
                     <h5 class="skillsWrapper">ABOUT ME</h5>
-                    <p style="margin-bottom: 15px !important;">Hello! I’m a passionate web developer with expertise in a
+                    <p style="margin-bottom: 15px !important;" contenteditable="false">Hello! I’m a passionate web
+                        developer with expertise in a
                         wide range
                         of modern technologies. I
                         specialize in JavaScript,
@@ -441,7 +512,8 @@
                         life. My experience spans
                         backend development with Node.js, Express.js, and MongoDB, as well as working with NoSQL
                         databases.</p>
-                    <p>I’m proficient in frontend technologies like HTML5, CSS3, Sass, and frameworks such as Bootstrap
+                    <p contenteditable="false">I’m proficient in frontend technologies like HTML5, CSS3, Sass, and
+                        frameworks such as Bootstrap
                         and Material UI,
                         ensuring clean, responsive, and user-friendly interfaces. With knowledge in creating and
                         consuming REST APIs, managing
@@ -453,7 +525,7 @@
                 <div style="margin-top: 50px;" class="exp">
                     <h5 class="skillsWrapper">EXPERIENCE</h5>
                     <div class="timeline">
-                        <div class="timeline-item right">
+                        <div class="timeline-item right" contenteditable="false">
                             <h5>React Developer - Serino360</h5>
                             <p>Makati City (WFH) (2022 - Present)</p>
                             <p style="margin: 10px 0;">I am a React Developer at this company. My role is to convert all
@@ -467,21 +539,21 @@
                                 <li>Front-End (React • React-Query • React-redux-toolkit • Material UI • REST API)</li>
                             </ul>
                         </div>
-                        <div class="timeline-item right">
+                        <div class="timeline-item right" contenteditable="false">
                             <h5>Web Designer - XYZ Agency (2019 - 2021)</h5>
                             <ul>
                                 <li>Designed wireframes and prototypes for client projects.</li>
                                 <li>Worked closely with developers to implement UI designs.</li>
                             </ul>
                         </div>
-                        <div class="timeline-item right">
+                        <div class="timeline-item right" contenteditable="false">
                             <h5>Bachelor's in Computer Science - University of Example (2015 - 2019)</h5>
                         </div>
-                        <div class="timeline-item right">
+                        <div class="timeline-item right" contenteditable="false">
                             <h5>Portfolio Website</h5>
                             <p>A personal portfolio showcasing my skills.</p>
                         </div>
-                        <div class="timeline-item right">
+                        <div class="timeline-item right" contenteditable="false">
                             <h5>E-commerce Platform</h5>
                             <p>Developed a full-stack e-commerce app.</p>
                         </div>
@@ -491,13 +563,50 @@
         </div>
 
     </div>
+    <div class="edit-icon" id="editIcon">✎</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Mode Activated</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    You can now edit the content. Changes will be restored to default on refresh. You can download the
+                    edited version as a PDF.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Handle the PDF download
         document.getElementById("downloadBtn").addEventListener("click", function () {
             window.print();
         });
-    </script>
+
+        // Scroll to the next section on arrow click
+        document.getElementById("arrowDown").addEventListener("click", function () {
+            if (window.innerWidth <= 768) {
+                document.getElementById("nextSection").scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Toggle contenteditable on edit icon click and show modal
+        document.getElementById("editIcon").addEventListener("click", function () {
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            editableElements.forEach(element => {
+                element.contentEditable = element.contentEditable === "true" ? "false" : "true";
+            });
+            const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+            editModal.show();
+        });
     </script>
 </body>
 
