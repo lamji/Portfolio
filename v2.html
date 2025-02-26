@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Resume</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inconsolata', monospace;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .resume-header {
+            padding: 40px;
+            background-color: #fffefe;
+            position: relative;
+            height: auto;
+        }
+
+        .contact-info {
+            display: block;
+            /* margin-top: -15px; */
+        }
+
+        p {
+            margin-bottom: 2px !important;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            /* margin: 50px auto; */
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #333;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            /* Align timeline to left */
+            margin-left: 0;
+            /* Remove negative margin */
+        }
+
+        .timeline-item {
+            padding: 20px;
+            position: relative;
+            width: 60%;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 15px;
+            right: -10px;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .name {
+            margin: 0 !important;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+        }
+
+        .name2 {
+            margin: 0 !important;
+            margin-top: -10px !important;
+            font-weight: bolder;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+        }
+
+        .lineup {
+            background-color: #333;
+            height: 35px;
+            width: 5px;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .lineOne {
+            width: 30%;
+        }
+
+        .lineTwo {
+            width: 60%;
+        }
+
+        .skillsWrapper {
+            letter-spacing: 7px;
+            font-weight: bold;
+            font-size: 26px;
+        }
+
+        .icon-paragraph {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .icon-paragraph span {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-paragraph span::before {
+            content: "•";
+            /* Circle (bullet) icon */
+            /* Adjust the size of the circle */
+            margin-right: 5px;
+            /* Space between icon and text */
+        }
+
+        .timeline::after {
+            left: 20px;
+        }
+
+        .timeline-item {
+            width: 100%;
+            padding-left: 40px;
+
+            left: 0 !important;
+        }
+
+        .timeline-item::after {
+            left: 10px !important;
+            right: auto;
+        }
+
+        h5 {
+            font-weight: bolder;
+        }
+
+        /* li {
+            margin-bottom: 10px !important
+        } */
+
+        /* Container for the project item */
+        .project-item {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        /* The modal style for the floating image, centered in the viewport */
+        .project-item .modal-image {
+            position: fixed;
+            /* Position it relative to the viewport */
+            top: 50%;
+            /* Position vertically at the center of the viewport */
+            left: 50%;
+            /* Position horizontally at the center of the viewport */
+            transform: translate(-50%, -50%);
+            /* Center the image exactly */
+            width: 500px;
+            /* Set the size of the modal image */
+            height: auto;
+            opacity: 0;
+            /* Hidden by default */
+            visibility: hidden;
+            /* Hidden by default */
+            transition: opacity 0.3s ease, visibility 0s 0.3s;
+            /* Smooth fade-in */
+            z-index: 10;
+            /* Ensure it appears above other elements */
+            border: 2px solid #fff;
+            /* Optional: Add a border around the image */
+            border-radius: 8px;
+            /* Optional: Add rounded corners */
+        }
+
+        /* Show the modal image when hovering over the project item */
+        .project-item:hover .modal-image {
+            opacity: 1;
+            /* Make the image visible */
+            visibility: visible;
+            /* Ensure it's visible */
+            transition: opacity 0.3s ease, visibility 0s 0s;
+            /* Immediate visibility change */
+        }
+
+        /* Optional: Style for the project name and description */
+        .project-item h5,
+        .project-item p {
+            margin-bottom: 10px;
+        }
+
+        .link {
+            display: none;
+        }
+
+        .p-head {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .span-head {
+            font-weight: bold;
+            color: #002cad;
+        }
+
+        .print-info {
+            display: none;
+        }
+
+        .web-view {
+            display: block;
+        }
+
+        .infoHolder {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .arrow-down {
+            display: none;
+        }
+
+        .edit-icon {
+            position: fixed;
+            bottom: 40px;
+            right: 20px;
+            z-index: 100;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            padding: 9px 12px;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .version-icon {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            z-index: 100;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border-radius: 50%;
+            padding: 9px 12px;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+        }
+
+        @media screen and (max-width: 768px) {
+
+
+            .resume-header {
+                padding: 10px 30px;
+                background-color: #fffefe;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                justify-content: center;
+                position: relative;
+            }
+
+            .infoHolder {
+                display: block;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .arrow-down {
+                display: block;
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .lineOne {
+                width: 100%;
+            }
+
+            .lineTwo {
+                width: 100%;
+            }
+
+            .wrapper {
+                display: block;
+            }
+
+            .aboutMe {
+                display: none;
+            }
+
+            ul {
+                padding-left: 0;
+            }
+
+            li {
+                margin-left: 20px;
+            }
+
+            .lineHeight {
+                display: none;
+            }
+        }
+
+        @media print {
+
+            /* Set the page to portrait mode */
+            @page {
+                size: 8.5in 13in;
+                /* Width x Height in inches */
+                size: portrait;
+                margin: 10mm;
+            }
+
+            .edit-icon {
+                display: none;
+            }
+
+            .lineHeight {
+                display: none;
+            }
+
+            .arrow-down {
+                display: none;
+            }
+
+            .print-info {
+                display: block;
+            }
+
+            .web-view {
+                display: none;
+            }
+
+            /* Additional print styles */
+            body {
+                font-family: 'Inconsolata', monospace;
+                font-size: 12px;
+                /* background-color: #ffffff; */
+            }
+
+
+            p {
+                font-size: 16px !important;
+            }
+
+            .resume-header {
+                padding: 10px 40px;
+                background-color: #fffefe;
+                height: auto;
+            }
+
+            /* .timeline,
+            .skillsWrapper,
+            .project-item,
+            .aboutMe {
+                font-size: 10px;
+                line-height: 1.5;
+            } */
+
+            /* Hide elements that should not appear in the print version */
+            #downloadBtn,
+            a {
+                display: none;
+            }
+
+            ul {
+                padding-left: 0;
+            }
+
+            .link {
+                display: block;
+            }
+
+            .exp {
+                margin-top: 60px !important;
+            }
+
+            li {
+                margin-left: 20px;
+                font-size: 16px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="resume-header">
+            <div class="lineup"></div>
+            <h4 class="name" contenteditable="false">Jick</h4>
+            <h1 class="name2" contenteditable="false">Lampagov2</h1>
+            <div></div>
+            <p contenteditable="false">React Developer | Freelancer</p>
+            <div class="infoHolder">
+                <p class="contact-info web-view" contenteditable="false">📞 09490390624 <span
+                        class="lineHeight">|</span></p>
+                <p class="contact-info">🏠 Pio V. Corpus, Masbate, Ph <span class="lineHeight">|</span></p>
+                <p class="contact-info web-view" contenteditable="false">✉️ <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=lampagojick5@gmail.com" target="_blank"
+                        style="text-decoration: none; color: inherit;">lampagojick5@gmail.com</a> <span
+                        class="lineHeight">|</span></p>
+
+                <p class="contact-info web-view" contenteditable="false"> 🔗 <a
+                        href="https://www.linkedin.com/in/jick-lampago/" target="_blank"
+                        style=" text-decoration: none;">LinkedIn</a><span
+                        class="link">https://www.linkedin.com/in/jick-lampago/</span>
+                </p>
+            </div>
+
+            <div class="print-info">
+                <p class="contact-info">📞 09490390624 </p>
+                <p class="contact-info">✉️ lampagojick5@gmail.com</p>
+                <p class="contact-info">🔗 https://www.linkedin.com/in/jick-lampago/</p>
+                <p class="contact-info">🏠 Pio V. Corpus, Masbate, Ph</p>
+            </div>
+            <button id="downloadBtn" class="btn btn-primary mb-3">Download Resume as PDF</button>
+            <div class="lineup"></div>
+            <!-- Add arrow indicating more content below -->
+            <div class="arrow-down" id="arrowDown">
+                <span style="font-size: 44px;">&#8595;</span>
+            </div>
+        </div>
+
+        <div class="wrapper" id="nextSection" style="padding: 40px;">
+            <div class="lineOne">
+                <div>
+                    <h4 class="skillsWrapper">SKILLS</h4>
+                    <p class="icon-paragraph" contenteditable="false">
+                        <span>Javascript</span>
+                        <span>ES6</span>
+                        <span>Next.js</span>
+                        <span>Jquery</span>
+                        <span>Express.js</span>
+                        <span>MongoDB</span>
+                        <span>NoSql</span>
+                        <span>Node.js</span>
+                        <span>React.js</span>
+                        <span>Sass</span>
+                        <span>Css3</span>
+                        <span>Html 5</span>
+                        <span>Bootstrap 4 and 5</span>
+                        <span>React Bootstrap</span>
+                        <span>Material UI</span>
+                        <span>Rest API</span>
+                        <span>Creating API</span>
+                        <span>Git Version Control</span>
+                        <span>Redux</span>
+                        <span>React Package</span>
+                        <span>React-redux-toolkit</span>
+                        <span>React-query</span>
+                        <span>Typescript</span>
+                    </p>
+                </div>
+                <div style="margin-top: 50px;">
+                    <h5 class="skillsWrapper">PROJECTS</h5>
+                    <li class="project-item" contenteditable="false">
+                        <h5>Covid 19 tracker - dark mode</h5>
+                        <p>React.js - Next.js - React Bootstrap - React Sass - MapBox - JavaScrip Es6 - Public API
+                        </p>
+                        <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
+                        <!-- The modal image that appears on hover -->
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/032/487/851/small_2x/tender-touch-baby-care-products-presented-on-a-white-canvas-generative-ai-photo.jpg"
+                            alt="Covid 19 Tracker Image" class="modal-image" />
+                    </li>
+                    <li class="project-item" contenteditable="false">
+                        <h5>Web POS</h5>
+                        <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
+                            -Next API</p>
+                        <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
+                        <!-- The modal image for Web POS -->
+                        <img src="https://img.freepik.com/free-photo/flat-lay-natural-self-care-products-composition_23-2148990019.jpg"
+                            alt="Web POS Image" class="modal-image" />
+                    </li>
+                    <li class="project-item" contenteditable="false">
+                        <h5>Task Logger</h5>
+                        <p>React.js - Next.js - Material UI - CSS - React-Query - JavaScrip Es6 - Redux - MongoDB
+                            -Next API</p>
+                        <a href="https://covid-19-tracker-dark-mode.vercel.app/" target="_blank">Live Demo</a>
+                        <!-- The modal image for Task Logger -->
+                        <img src="https://media.istockphoto.com/id/584574708/photo/soap-bar-and-liquid-shampoo-shower-gel-towels-spa-kit.jpg?s=612x612&w=0&k=20&c=TFeQmTwVUwKY0NDKFFORe3cwDCxRtotFgEujMswn3dc="
+                            alt="Task Logger Image" class="modal-image" />
+                    </li>
+
+
+                </div>
+            </div>
+
+
+
+            <div class="lineTwo ">
+                <div class="aboutMe">
+                    <h5 class="skillsWrapper">ABOUT ME</h5>
+                    <p style="margin-bottom: 15px !important;" contenteditable="false">Hello! I’m a passionate web
+                        developer with expertise in a
+                        wide range
+                        of modern technologies. I
+                        specialize in JavaScript,
+                        ES6, and frameworks like React.js and Next.js, bringing dynamic and responsive applications to
+                        life. My experience spans
+                        backend development with Node.js, Express.js, and MongoDB, as well as working with NoSQL
+                        databases.</p>
+                    <p contenteditable="false">I’m proficient in frontend technologies like HTML5, CSS3, Sass, and
+                        frameworks such as Bootstrap
+                        and Material UI,
+                        ensuring clean, responsive, and user-friendly interfaces. With knowledge in creating and
+                        consuming REST APIs, managing
+                        state with Redux, React-Redux Toolkit, and using tools like React Query, I can build full-stack
+                        solutions that perform
+                        at scale.</p>
+
+                </div>
+                <div style="margin-top: 50px;" class="exp">
+                    <h5 class="skillsWrapper">EXPERIENCE</h5>
+                    <div class="timeline">
+                        <div class="timeline-item right" contenteditable="false">
+                            <h5>React Developer - Serino360</h5>
+                            <p>Makati City (WFH) (2022 - Present)</p>
+                            <p style="margin: 10px 0;">I am a React Developer at this company. My role is to convert all
+                                figma designs into
+                                a functional React project using
+                                the MVVM approach, Implement Redux on every React project, including API integration
+                                and validation.</p>
+                            <p class="p-head">Tech used</p>
+                            <ul>
+                                <li>Backend Support (node.js, express.js, Javascript, Mustache.js)</li>
+                                <li>Front-End (React • React-Query • React-redux-toolkit • Material UI • REST API)</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item right" contenteditable="false">
+                            <h5>Web Designer - XYZ Agency (2019 - 2021)</h5>
+                            <ul>
+                                <li>Designed wireframes and prototypes for client projects.</li>
+                                <li>Worked closely with developers to implement UI designs.</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item right" contenteditable="false">
+                            <h5>Bachelor's in Computer Science - University of Example (2015 - 2019)</h5>
+                        </div>
+                        <div class="timeline-item right" contenteditable="false">
+                            <h5>Portfolio Website</h5>
+                            <p>A personal portfolio showcasing my skills.</p>
+                        </div>
+                        <div class="timeline-item right" contenteditable="false">
+                            <h5>E-commerce Platform</h5>
+                            <p>Developed a full-stack e-commerce app.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="version-icon" id="versionIcon">V2</div>
+    <div class="edit-icon" id="editIcon">✎</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Mode Activated</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    You can now edit the content. Changes will be restored to default on refresh. You can download the
+                    edited version as a PDF.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Handle the PDF download
+        document.getElementById("downloadBtn").addEventListener("click", function () {
+            window.print();
+        });
+
+        // Scroll to the next section on arrow click
+        document.getElementById("arrowDown").addEventListener("click", function () {
+            if (window.innerWidth <= 768) {
+                document.getElementById("nextSection").scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Toggle contenteditable on edit icon click and show modal
+        document.getElementById("editIcon").addEventListener("click", function () {
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            editableElements.forEach(element => {
+                element.contentEditable = element.contentEditable === "true" ? "false" : "true";
+            });
+            const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+            editModal.show();
+        });
+
+        // Redirect to another resume version
+        document.getElementById("versionIcon").addEventListener("click", function () {
+            window.location.href = "/D:/9-PERSONAL PROJECTS/17-htmlOnly/v2.html";
+        });
+    </script>
+</body>
+
+</html>
