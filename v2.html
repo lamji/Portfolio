@@ -259,7 +259,7 @@
             height: 50px;
         }
 
-        .version-icon {
+        .back-icon {
             position: fixed;
             bottom: 100px;
             right: 20px;
@@ -582,7 +582,7 @@
         </div>
 
     </div>
-    <div class="version-icon" id="versionIcon">Back</div>
+    <div class="back-icon" id="backIcon">Back</div>
     <div class="edit-icon" id="editIcon">✎</div>
 
     <!-- Modal -->
@@ -628,9 +628,9 @@
             editModal.show();
         });
 
-        // Redirect to another resume version
-        document.getElementById("versionIcon").addEventListener("click", function () {
-            window.location.href = "/";
+        // Redirect to the previous page
+        document.getElementById("backIcon").addEventListener("click", function () {
+            window.history.back();
         });
     </script>
 </body>
