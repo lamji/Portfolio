@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Resume</title>
+    <title>Jick Lampago - React Developer & Freelancer</title>
+    <meta name="description"
+        content="Jick Lampago's portfolio showcasing skills and projects as a React Developer and Freelancer.">
+    <meta name="keywords"
+        content="Jick Lampago, React Developer, Freelancer, Portfolio, Web Developer, JavaScript, Next.js, Node.js">
+    <meta name="author" content="Jick Lampago">
+    <link rel="icon" href="/4918049.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -18,6 +24,9 @@
         }
 
         .resume-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 40px;
             background-color: #fffefe;
             position: relative;
@@ -198,14 +207,7 @@
         }
 
         /* Show the modal image when hovering over the project item */
-        .project-item:hover .modal-image {
-            opacity: 1;
-            /* Make the image visible */
-            visibility: visible;
-            /* Ensure it's visible */
-            transition: opacity 0.3s ease, visibility 0s 0s;
-            /* Immediate visibility change */
-        }
+
 
         /* Optional: Style for the project name and description */
         .project-item h5,
@@ -319,6 +321,14 @@
             background-color: #f1f1f1;
         }
 
+        .imge-style {
+            margin-right: 50px;
+        }
+
+        .imge-style {
+            display: none;
+        }
+
         @media screen and (max-width: 768px) {
 
 
@@ -376,6 +386,10 @@
             .lineHeight {
                 display: none;
             }
+
+            .imge-style {
+                display: none;
+            }
         }
 
         @media print {
@@ -386,6 +400,11 @@
                 /* Width x Height in inches */
                 size: portrait;
                 margin: 10mm;
+            }
+
+            .imge-style {
+                margin-right: 0px;
+                display: block;
             }
 
             .edit-icon {
@@ -463,39 +482,47 @@
 <body>
     <div>
         <div class="resume-header">
-            <div class="lineup"></div>
-            <h4 class="name" contenteditable="false">Jick</h4>
-            <h1 class="name2" contenteditable="false">Lampago</h1>
-            <div></div>
-            <p contenteditable="false">React Developer | Freelancer</p>
-            <div class="infoHolder">
-                <p class="contact-info web-view" contenteditable="false">📞 09490390624 <span
-                        class="lineHeight">|</span></p>
-                <p class="contact-info">🏠 Pio V. Corpus, Masbate, Ph <span class="lineHeight">|</span></p>
-                <p class="contact-info web-view" contenteditable="false">✉️ <a
+            <div class="info-header">
+                <div class="lineup"></div>
+                <h4 class="name" contenteditable="false">Jick</h4>
+                <h1 class="name2" contenteditable="false">Lampago</h1>
+                <div></div>
+                <p contenteditable="false">React Developer | Freelancer</p>
+                <p class="contact-info"><i class="fa-solid fa-location-pin"></i> Pio V. Corpus, Masbate, Ph </p>
+                <p class="contact-info web-view" contenteditable="false"><i class="fa-solid fa-envelope"></i> <a
                         href="https://mail.google.com/mail/?view=cm&fs=1&to=lampagojick5@gmail.com" target="_blank"
-                        style="text-decoration: none; color: inherit;">lampagojick5@gmail.com</a> <span
-                        class="lineHeight">|</span></p>
-
-                <p class="contact-info web-view" contenteditable="false"> 🔗 <a
-                        href="https://www.linkedin.com/in/jick-lampago/" target="_blank"
-                        style=" text-decoration: none;">LinkedIn</a><span
+                        style="text-decoration: none; color: inherit;">lampagojick5@gmail.com</a> </p>
+                <p class="contact-info web-view" contenteditable="false"> <i class="fab fa-linkedin"
+                        style="margin-right: 10px !important;"></i><a href="https://www.linkedin.com/in/jick-lampago/"
+                        target="_blank" style=" text-decoration: none;">LinkedIn</a><span
                         class="link">https://www.linkedin.com/in/jick-lampago/</span>
                 </p>
-            </div>
+                <div class="infoHolder">
+                    <p class="contact-info" contenteditable="false"><i class="fab fa-skype"></i> 09206502183 <span
+                            class="lineHeight">|</span></p>
+                    <p class="contact-info" contenteditable="false"><i class="fab fa-viber"></i> 09206502183 <span
+                            class="lineHeight">|</span></p>
+                    <p class="contact-info" contenteditable="false"><i class="fa-solid fa-phone"></i> 09490390624
+                    </p>
 
-            <div class="print-info">
-                <p class="contact-info">📞 09490390624 </p>
-                <p class="contact-info">✉️ lampagojick5@gmail.com</p>
-                <p class="contact-info">🔗 https://www.linkedin.com/in/jick-lampago/</p>
-                <p class="contact-info">🏠 Pio V. Corpus, Masbate, Ph</p>
+                </div>
+                <div class="print-info">
+                    <p class="contact-info"><i class="fa-solid fa-envelope"></i> lampagojick5@gmail.com
+                    </p>
+                    <p class="contact-info"><i class="fab fa-linkedin" style="margin-right: 10px !important;"></i>
+                        https://www.linkedin.com/in/jick-lampago/</p>
+
+                </div>
+                <button style="border-color: #f4f4f4;" id="downloadBtn" class="mb-3">Download Resume as PDF</button>
+                <div class="lineup"></div>
+                <!-- Add arrow indicating more content below -->
+                <div class="arrow-down" id="arrowDown">
+                    <span style="font-size: 24px;">&#8595;</span>
+                </div>
             </div>
-            <button id="downloadBtn" class="btn btn-primary mb-3">Download Resume as PDF</button>
-            <div class="lineup"></div>
-            <!-- Add arrow indicating more content below -->
-            <div class="arrow-down" id="arrowDown">
-                <span style="font-size: 24px;">&#8595;</span>
-            </div>
+            <div class="image-print"><img class="imge-style" src="/imges.jpg" alt="Jick Lampago"
+                    style="border-radius: 50%; width: 180px; height: 180px;"></div>
+
         </div>
 
         <div class="wrapper" id="nextSection" style="padding: 40px;">
@@ -527,6 +554,7 @@
                         <span>Typescript</span>
                     </p>
                 </div>
+
                 <div style="margin-top: 50px;">
                     <h5 class="skillsWrapper">PROJECTS</h5>
                     <li class="project-item" contenteditable="false">
@@ -559,6 +587,20 @@
 
 
                 </div>
+
+                <div style="margin-top: 50px;">
+                    <h5 class="skillsWrapper" style="margin-bottom: 0px !important;">EDUCATION</h5>
+                    <li class="project-item" style="margin-top: 10px !important;" contenteditable="false">
+                        <h5 style="margin: 0 !important;">Apprenticeship in Full Stack Web Developer</h5>
+                        <p style="font-size: 14px;">Tuitt Bootcamp Ph - Quezon City</p>
+                        <p>June 2020 to October 2020</p>
+                    </li>
+                    <li class="project-item" style="margin-top: 10px !important;" contenteditable="false">
+                        <h5 style="margin: 0 !important;">Associated Course in Information Technology</h5>
+                        <p style="font-size: 14px;">Cataingan Polytechnic Institute - Masbate City</p>
+                        <p>March 2011 to June 2013</p>
+                    </li>
+                </div>
             </div>
 
 
@@ -590,7 +632,7 @@
                     <div class="timeline">
                         <div class="timeline-item right" contenteditable="false">
                             <h5>React Developer - Serino360</h5>
-                            <p>Makati City (WFH) (2022 - Present)</p>
+                            <p>Makati City (WFH) (March 2022 - Present)</p>
                             <p style="margin: 10px 0;">I am a React Developer at this company. My role is to convert all
                                 figma designs into
                                 a functional React project using
@@ -602,38 +644,67 @@
                                 <li>Front-End (React • React-Query • React-redux-toolkit • Material UI • REST API)</li>
                             </ul>
                         </div>
+
+
                         <div class="timeline-item right" contenteditable="false">
-                            <h5>Web Designer - XYZ Agency (2019 - 2021)</h5>
+                            <h5>Front End Developer - Elearnified</h5>
+                            <p>Makati City (WFH - Part Time) (June 2022 to August 2022)</p>
+                            <p style="margin: 10px 0;">I work as a front-end developer at the company, I was responsible
+                                for revamping the
+                                existing
+                                Moodle design to align with the
+                                new UI/UX specifications. This involved implementing styles using SCSS and enhancing
+                                interactivity with JavaScript and
+                                jQuery. Working in Philippine Red Cross LMS project</p>
+                            <p class="p-head">Tech used</p>
                             <ul>
-                                <li>Designed wireframes and prototypes for client projects.</li>
-                                <li>Worked closely with developers to implement UI designs.</li>
+                                <li>Front-End (Css • Javascript • Html • Jquery • REST API)</li>
                             </ul>
                         </div>
+
+
                         <div class="timeline-item right" contenteditable="false">
-                            <h5>Bachelor's in Computer Science - University of Example (2015 - 2019)</h5>
+                            <h5>Full Stack Developer - Abakada Studios</h5>
+                            <p>Makati City (WFH) (March 2021 to May 2022)</p>
+                            <p style="margin: 10px 0;">I am a javascript developer in this enterprise, working on a
+                                frontend using vanilla javascript, Vue.js,html5, bootstrap
+                                and jquery. At the same time, since we use an open source tool that is developed in
+                                Javascript and Python, I also used basic python on a back end. I have worked on a number
+                                of projects in this company with Paymongo payment integration.</p>
+                            <p class="p-head">Tech used</p>
+                            <ul>
+                                <li>Front-End (Css • Javascript • Html • Jquery • REST API • PHP • Bootstrap)</li>
+                            </ul>
                         </div>
+
+
                         <div class="timeline-item right" contenteditable="false">
-                            <h5>Portfolio Website</h5>
-                            <p>A personal portfolio showcasing my skills.</p>
+                            <h5>React.js Developer - Codally Tech</h5>
+                            <p>Makati City (WFH) (November 2020 to December 2020)</p>
+                            <p style="margin: 10px 0;">It is project based, My role on this project is for UI
+                                Development, Codally Tech is working on a project called A+
+                                Learning platform which serves as an online school during pandemic. We work as a team
+                                and use Agile Methodology. The
+                                entire UI project is developed using Next.js and Material UI..</p>
+                            <p class="p-head">Tech used</p>
+                            <ul>
+                                <li>Front-End (React.js • Javascript • Html • REST API • Redux)</li>
+                            </ul>
                         </div>
-                        <div class="timeline-item right" contenteditable="false">
-                            <h5>E-commerce Platform</h5>
-                            <p>Developed a full-stack e-commerce app.</p>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="dropdown">
+    <!-- <div class="dropdown">
         <button class="dropdown-toggle" id="dropdownMenuButton"><i class="fas fa-bars"></i></button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <div class="dropdown-item" data-version="v1.html">Version 1</div>
             <div class="dropdown-item" data-version="v2.html">Version 2</div>
-            <!-- Add more versions as needed -->
         </div>
-    </div>
+    </div> -->
     <div class="edit-icon" id="editIcon">✎</div>
 
     <!-- Modal -->
@@ -657,9 +728,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Detect browser and open the page in Chrome if not using Chrome
+        function detectBrowser() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isChrome = /chrome/.test(userAgent) && !/edge|edg|opr/.test(userAgent);
+
+            if (!isChrome) {
+                const url = window.location.href;
+                window.open(`googlechrome://${url}`, '_blank');
+                return false;
+            }
+            return true;
+        }
+
         // Handle the PDF download
         document.getElementById("downloadBtn").addEventListener("click", function () {
-            window.print();
+            if (detectBrowser()) {
+                window.print();
+            }
         });
 
         // Scroll to the next section on arrow click
